@@ -1,0 +1,22 @@
+table {
+    border-collapse: collapse;
+}
+
+td,
+th {
+    border: 2px solid rgb(13, 14, 13);
+    padding: 5px 10px;
+    font-size: 20px;
+}
+
+.table-color1 {
+    background-color: antiquewhite;
+}
+
+.table-color2 {
+    background-color: rgb(215, 226, 250);
+}
+
+.table-color3 {
+    background-color: rgb(248, 250, 215);
+}

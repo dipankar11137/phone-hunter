@@ -40,9 +40,92 @@ const detailsPhone = (phoneId) => {
 }
 
 const displayDetailsPhone = (phone) => {
+    const detailsContainer = document.getElementById('details-container');
+    const div = document.createElement('div');
+    div.innerHTML = `
+    <div class="card w-75 ">
+                <div class="d-flex justify-content-center p-3">
+                    <img src="${phone.image}" class="card-img-top w-50"
+                        alt="...">
+                </div>
+                <div class="card-body  p-1 d-flex justify-content-center">
+                    <h5 class="card-title">${phone.name}</h5>
+                </div>
+                <div class="p-1 d-flex justify-content-center">
+                    <table>
+                        <tbody>
+                            <tr class="table-color1">
+                                <td>Release</td>
+                                <td>${phone.releaseDate}</td>
+                            </tr>
+
+                            <tr class="table-color2">
+                                <td>Brand</td>
+                                <td>${phone.brand}</td>
+                            </tr>
+                            <tr class="table-color3">
+                                <td class="fw-bold">Connective</td>
+                                <td></td>
+                            </tr>
+                            <tr class="table-color1">
+                                <td>Bluetooth</td>
+                                <td>${phone.others.Bluetooth}</td>
+                            </tr>
+
+                            <tr class="table-color2">
+                                <td>GPS</td>
+                                <td>${phone.others.GPS}</td>
+                            </tr>
+                            <tr class="table-color1">
+                                <td>NFC</td>
+                                <td>${phone.others.NFC}</td>
+                            </tr>
+                            <tr class="table-color2">
+                                <td>Radio</td>
+                                <td>${phone.others.Radio}</td>
+                            </tr>
+
+                            <tr class="table-color1">
+                                <td>USB</td>
+                                <td>${phone.others.USB}</td>
+                            </tr>
+                            <tr class="table-color2">
+                                <td>WLAN</td>
+                                <td>${phone.others.WLAN}</td>
+                            </tr>
+                            <tr class="table-color1">
+                                <td>Sensors</td>
+                                <td>${phone.mainFeatures.sensors[0]},${phone.mainFeatures.sensors[1]},${phone.mainFeatures.sensors[2]}, ${phone.mainFeatures.sensors[3]},${phone.mainFeatures.sensors[4]}, ${phone.mainFeatures.sensors[5]}}</td>
+                            </tr>
+
+                            <tr class="table-color3">
+                                <td class="fw-bold">Display</td>
+                                <td></td>
+                            </tr>
+                            <tr class="table-color2">
+                                <td>Size</td>
+                                <td>${phone.mainFeatures.displaySize}</td>
+                            </tr>
+                            <tr class="table-color1">
+                                <td>Storage</td>
+                                <td>${phone.mainFeatures.storage}</td>
+                            </tr>
+
+                            <tr class="table-color2">
+                                <td>ChipSet</td>
+                                <td>${phone.mainFeatures.chipSet}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+    
+    `
+    detailsContainer.appendChild(div);
+
     console.log(phone)
-    console.log(phone.image)
-    console.log(phone.name)
+    // console.log(phone.image)
+    // console.log(phone.name)
     // console.log(phone.releaseDate)
     // console.log(phone.brand)
     // console.log(phone.mainFeatures.chipSet)
@@ -51,7 +134,7 @@ const displayDetailsPhone = (phone) => {
     // sensor    
     console.log(phone.mainFeatures.sensors[0])
     console.log(phone.mainFeatures.sensors[1])
-    console.log(displaySensor(phone.mainFeatures.sensors))
+    // console.log(displaySensor(phone.mainFeatures.sensors))
     // others
     // console.log(phone.others.Bluetooth)
     // console.log(phone.others.GPS)
@@ -59,8 +142,7 @@ const displayDetailsPhone = (phone) => {
     // console.log(phone.others.Radio)
     // console.log(phone.others.USB)
     // console.log(phone.others.WLAN)
-    // console.log(phone)
-    // console.log(phone)
+
 }
 
 /*
