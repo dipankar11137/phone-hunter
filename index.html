@@ -13,14 +13,33 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 
-<body>
+<body style="background-color: antiquewhite;">
     <h1>Phone Fisherman</h1>
     <section class="container">
         <!-- input  -->
         <div class="input-group mb-3 w-50">
-            <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username"
-                aria-describedby="button-addon2">
-            <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+            <input id="input-phone" type="text" class="form-control" placeholder="Phone name"
+                aria-label="Recipient's username" aria-describedby="button-addon2">
+            <button onclick="inputData()" class="btn btn-outline-secondary" type="button"
+                id="button-addon2">Search</button>
+        </div>
+        <!-- phone show card  -->
+        <div id="phone-div-container" class="row row-cols-1 row-cols-md-3 g-4 mt-3">
+            <!-- <div class="col rounded-3  ">
+                <div class="card h-100 rounded-3 shadow-lg">
+                    <div class="p-1 shadow-lg ">
+                        <img src="https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-13-pro.jpg"
+                            class="card-img-top img-fluid" alt="...">
+                    </div>
+                    <div class="card-body shadow-lg ">
+                        <h3>Name : </h3>
+                        <h5>Brand : </h5>
+                        <div class="d-flex justify-content-end ">
+                            <button class="btn btn-primary">Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
         </div>
 
     </section>
