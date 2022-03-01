@@ -14,15 +14,21 @@
 </head>
 
 <body style="background-color: antiquewhite;">
-    <h1>Phone Fisherman</h1>
+    <div class=" d-flex justify-content-center  shadow-lg">
+        <h1 class="text-center shadow-lg p-3 bg-info mt-2 fw-bold rounded-3 ">PHONE FISHERMAN</h1>
+    </div>
+
     <section class="container">
         <!-- input  -->
-        <div class="input-group mb-3 w-50">
-            <input id="input-phone" type="text" class="form-control" placeholder="Phone name"
-                aria-label="Recipient's username" aria-describedby="button-addon2">
-            <button onclick="inputData()" class="btn btn-outline-secondary" type="button"
-                id="button-addon2">Search</button>
+        <div class="d-flex justify-content-center mt-3">
+            <div class="input-group mb-3 w-50">
+                <input id="input-phone" type="text" class="form-control" placeholder="Phone name"
+                    aria-label="Recipient's username" aria-describedby="button-addon2">
+                <button onclick="inputData()" class="btn btn-primary rounded-3 fw-bold ms-3" type="button"
+                    id="button-addon2">Search</button>
+            </div>
         </div>
+
         <!-- phone show card  -->
         <div id="phone-div-container" class="row row-cols-1 row-cols-md-3 g-4 mt-3">
             <!-- <div class="col rounded-3  ">
@@ -41,6 +47,10 @@
                 </div>
             </div> -->
         </div>
+
+    </section>
+
+    <section class="p-5">
 
     </section>
 
