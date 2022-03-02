@@ -21,6 +21,9 @@ const inputData = () => {
         document.getElementById('input-phone').value = '';
         phoneDivContainer.innerHTML = '';
         detailsContainer.innerHTML = '';
+        document.getElementById('spiner').style.display = 'none';
+        document.getElementById('no-result').style.display = 'none';
+        document.getElementById('see-more-button').style.display = 'none';
     }
 
 }

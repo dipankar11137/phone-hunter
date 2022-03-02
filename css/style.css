@@ -1,3 +1,9 @@
+
+.header-style{
+    /* background-color: rgb(6, 72, 126); */
+    background-image: linear-gradient(rgb(155, 7, 175) ,rgb(2, 2, 143));
+    color: aliceblue;
+}
 table {
     border-collapse: collapse;
 }
