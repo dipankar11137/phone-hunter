@@ -24,3 +24,9 @@ th {
     display: none;
     font-size: 17px;
 }
+#no-result{
+    display: none;
+}
+#spiner{
+    display: none;
+}

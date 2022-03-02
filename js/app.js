@@ -4,7 +4,7 @@ const inputData = () => {
     const phoneDivContainer = document.getElementById('phone-div-container');
     const detailsContainer = document.getElementById('details-container');
     const error = document.getElementById('error');
-
+    document.getElementById('spiner').style.display = 'block';
     if (isNaN(inputPhoneName)) {
         document.getElementById('input-phone').value = '';
         const url = `https://openapi.programming-hero.com/api/phones?search=${inputPhoneName}`;
@@ -26,16 +26,25 @@ const inputData = () => {
 }
 // display phone
 const displayPhone = (phones) => {
-    const first20Phones = phones.slice(0, 20);
+    document.getElementById('spiner').style.display = 'none';
+    const noResult = document.getElementById('no-result');
+    if (phones.length == 0) {
+        noResult.innerText = "No Result Font";
+        noResult.style.display = 'block';
+        document.getElementById('see-more-button').style.display = 'none';
+    }
+    else {
+        const first20Phones = phones.slice(0, 20);
 
-    const phoneDivContainer = document.getElementById('phone-div-container');
+        const phoneDivContainer = document.getElementById('phone-div-container');
 
-    phoneDivContainer.innerHTML = '';
-    for (const phone of first20Phones) {
-        // console.log(phone);
-        const div = document.createElement('div');
-        div.classList.add('col');
-        div.innerHTML = `
+        phoneDivContainer.innerHTML = '';
+        noResult.style.display = 'none';
+        for (const phone of first20Phones) {
+            // console.log(phone);
+            const div = document.createElement('div');
+            div.classList.add('col');
+            div.innerHTML = `
         <div class="card h-100 rounded shadow-lg">
                     <div class="p-1 shadow-lg">
                         <img src="${phone.image}"
@@ -50,20 +59,20 @@ const displayPhone = (phones) => {
                     </div>
                 </div> 
         `
-        phoneDivContainer.appendChild(div);
+            phoneDivContainer.appendChild(div);
 
-    }
-    // more 20 phone
-    if (phones.length > 20) {
-        document.getElementById('see-more-button').style.display = 'block';
+        }
+        // more 20 phone
+        if (phones.length > 20) {
+            document.getElementById('see-more-button').style.display = 'block';
 
-        document.getElementById('see-more-button').addEventListener("click", function () {
-            const allPhones = phones.slice(20, phones.length);
+            document.getElementById('see-more-button').addEventListener("click", function () {
+                const allPhones = phones.slice(20, phones.length);
 
-            for (const phone of first20Phones) {
-                const div = document.createElement('div');
-                div.classList.add('col');
-                div.innerHTML = `
+                for (const phone of first20Phones) {
+                    const div = document.createElement('div');
+                    div.classList.add('col');
+                    div.innerHTML = `
                 <div class="card h-100 rounded shadow-lg">
                             <div class="p-1 shadow-lg">
                                 <img src="${phone.image}"
@@ -78,13 +87,13 @@ const displayPhone = (phones) => {
                             </div>
                         </div> 
                 `
-                phoneDivContainer.appendChild(div);
+                    phoneDivContainer.appendChild(div);
 
-            }
-            document.getElementById('see-more-button').style.display = 'none';
-        });
+                }
+                document.getElementById('see-more-button').style.display = 'none';
+            });
+        }
     }
-
 }
 
 // details phone
