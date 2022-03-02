@@ -20,3 +20,7 @@ th {
 .table-color3 {
     background-color: rgb(248, 250, 215);
 }
+#see-more-button{
+    display: none;
+    font-size: 17px;
+}

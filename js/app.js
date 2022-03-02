@@ -1,17 +1,11 @@
-
+// input phone 
 const inputData = () => {
     const inputPhoneName = document.getElementById('input-phone').value;
     const phoneDivContainer = document.getElementById('phone-div-container');
     const detailsContainer = document.getElementById('details-container');
     const error = document.getElementById('error');
 
-    if (inputPhoneName == "") {
-        error.innerText = "Plaease entar a Phone name";
-        document.getElementById('input-phone').value = '';
-        phoneDivContainer.innerHTML = '';
-        detailsContainer.innerHTML = '';
-    } else {
-
+    if (isNaN(inputPhoneName)) {
         document.getElementById('input-phone').value = '';
         const url = `https://openapi.programming-hero.com/api/phones?search=${inputPhoneName}`;
         fetch(url)
@@ -22,15 +16,23 @@ const inputData = () => {
         detailsContainer.innerHTML = '';
         error.innerText = '';
     }
+    else {
+        error.innerText = "Plaease entar a Phone name";
+        document.getElementById('input-phone').value = '';
+        phoneDivContainer.innerHTML = '';
+        detailsContainer.innerHTML = '';
+    }
 
 }
+// display phone
 const displayPhone = (phones) => {
     const first20Phones = phones.slice(0, 20);
-    console.log(first20Phones.length);
+
     const phoneDivContainer = document.getElementById('phone-div-container');
 
     phoneDivContainer.innerHTML = '';
     for (const phone of first20Phones) {
+        // console.log(phone);
         const div = document.createElement('div');
         div.classList.add('col');
         div.innerHTML = `
@@ -41,7 +43,7 @@ const displayPhone = (phones) => {
                     </div>
                     <div class="card-body shadow-lg ">
                         <h3>Name : ${phone.phone_name}</h3>
-                        <h5>Brand : ${phone.brand}</h5>
+                        <h5>Brand : ${phone.brand}</h5>                        
                         <div class="d-flex justify-content-end">
                             <button onclick="detailsPhone('${phone.slug}')" class="btn btn-primary">Details</button>
                         </div>
@@ -49,10 +51,43 @@ const displayPhone = (phones) => {
                 </div> 
         `
         phoneDivContainer.appendChild(div);
-        // console.log(phone.slug);
+
     }
+    // more 20 phone
+    if (phones.length > 20) {
+        document.getElementById('see-more-button').style.display = 'block';
+
+        document.getElementById('see-more-button').addEventListener("click", function () {
+            const allPhones = phones.slice(20, phones.length);
+
+            for (const phone of first20Phones) {
+                const div = document.createElement('div');
+                div.classList.add('col');
+                div.innerHTML = `
+                <div class="card h-100 rounded shadow-lg">
+                            <div class="p-1 shadow-lg">
+                                <img src="${phone.image}"
+                                    class="card-img-top img-fluid" alt="...">
+                            </div>
+                            <div class="card-body shadow-lg ">
+                                <h3>Name : ${phone.phone_name}</h3>
+                                <h5>Brand : ${phone.brand}</h5>
+                                <div class="d-flex justify-content-end">
+                                    <button onclick="detailsPhone('${phone.slug}')" class="btn btn-primary">Details</button>
+                                </div>
+                            </div>
+                        </div> 
+                `
+                phoneDivContainer.appendChild(div);
+
+            }
+            document.getElementById('see-more-button').style.display = 'none';
+        });
+    }
+
 }
 
+// details phone
 const detailsPhone = (phoneId) => {
     url = `https://openapi.programming-hero.com/api/phone/${phoneId}`
     fetch(url)
@@ -117,7 +152,7 @@ const displayDetailsPhone = (phone) => {
                             </tr>
                             <tr class="table-color1">
                                 <td>Sensors</td>
-                                <td>${phone?.mainFeatures?.sensors[0]},${phone?.mainFeatures?.sensors[1]},${phone?.mainFeatures?.sensors[2]}, ${phone?.mainFeatures?.sensors[3]},${phone?.mainFeatures?.sensors[4]}, ${phone?.mainFeatures?.sensors[5]}}</td>
+                                <td>${phone?.mainFeatures?.sensors[0]}, ${phone?.mainFeatures?.sensors[1]}, ${phone?.mainFeatures?.sensors[2]}, ${phone?.mainFeatures?.sensors[3]}, ${phone?.mainFeatures?.sensors[4]}, ${phone?.mainFeatures?.sensors[5]}}</td>
                             </tr>
 
                             <tr class="table-color3">
@@ -143,40 +178,9 @@ const displayDetailsPhone = (phone) => {
             </div>
     
     `
-    detailsContainer.appendChild(div);
 
-    // console.log(phone)
-    // console.log(phone.image)
-    // console.log(phone.name)
-    // console.log(phone.releaseDate)
-    // console.log(phone.brand)
-    // console.log(phone.mainFeatures.chipSet)
-    // console.log(phone.mainFeatures.displaySize)
-    // console.log(phone.mainFeatures.storage)
-    // sensor    
-    // console.log(phone.mainFeatures.sensors[0])
-    // console.log(phone.mainFeatures.sensors[1])
-    // console.log(displaySensor(phone.mainFeatures.sensors))
-    // others
-    // console.log(phone.others.Bluetooth)
-    // console.log(phone.others.GPS)
-    // console.log(phone.others.NFC)
-    // console.log(phone.others.Radio)
-    // console.log(phone.others.USB)
-    // console.log(phone.others.WLAN)
+    detailsContainer.appendChild(div);
 
 }
 
-/*
- onst displaySensor = (sensors) => {
-    console.log(sensors);
-    let sumSensor;
-    for (const sensor of sensors) {
-        // console.log(sensor)
-        sumSensor = sensor
 
-    }
-    return sumSensor;
-
-} 
-*/
