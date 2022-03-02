@@ -1,15 +1,36 @@
 
 const inputData = () => {
     const inputPhoneName = document.getElementById('input-phone').value;
-    const url = `https://openapi.programming-hero.com/api/phones?search=${inputPhoneName}`;
-    fetch(url)
-        .then(res => res.json())
-        .then(data => displayPhone(data.data))
+    const phoneDivContainer = document.getElementById('phone-div-container');
+    const detailsContainer = document.getElementById('details-container');
+    const error = document.getElementById('error');
+
+    if (inputPhoneName == "") {
+        error.innerText = "Plaease entar a Phone name";
+        document.getElementById('input-phone').value = '';
+        phoneDivContainer.innerHTML = '';
+        detailsContainer.innerHTML = '';
+    } else {
+
+        document.getElementById('input-phone').value = '';
+        const url = `https://openapi.programming-hero.com/api/phones?search=${inputPhoneName}`;
+        fetch(url)
+            .then(res => res.json())
+            .then(data => displayPhone(data.data))
+
+        phoneDivContainer.innerHTML = '';
+        detailsContainer.innerHTML = '';
+        error.innerText = '';
+    }
 
 }
 const displayPhone = (phones) => {
-    for (const phone of phones) {
-        const phoneDivContainer = document.getElementById('phone-div-container');
+    const first20Phones = phones.slice(0, 20);
+    console.log(first20Phones.length);
+    const phoneDivContainer = document.getElementById('phone-div-container');
+
+    phoneDivContainer.innerHTML = '';
+    for (const phone of first20Phones) {
         const div = document.createElement('div');
         div.classList.add('col');
         div.innerHTML = `
@@ -41,27 +62,28 @@ const detailsPhone = (phoneId) => {
 
 const displayDetailsPhone = (phone) => {
     const detailsContainer = document.getElementById('details-container');
+    detailsContainer.innerHTML = '';
     const div = document.createElement('div');
     div.innerHTML = `
-    <div class="card w-75 ">
+    <div class="card ">
                 <div class="d-flex justify-content-center p-3">
-                    <img src="${phone.image}" class="card-img-top w-50"
+                    <img src="${phone?.image}" class="card-img-top w-50"
                         alt="...">
                 </div>
-                <div class="card-body  p-1 d-flex justify-content-center">
-                    <h5 class="card-title">${phone.name}</h5>
+                <div class="card-body mt-2 mb-4 table-color2 shadow p-1 d-flex justify-content-center">
+                    <h2 class="card-title fw-bold">${phone?.name}</h2>
                 </div>
-                <div class="p-1 d-flex justify-content-center">
+                <div class="p-1 pb-2 d-flex justify-content-center">
                     <table>
                         <tbody>
                             <tr class="table-color1">
                                 <td>Release</td>
-                                <td>${phone.releaseDate}</td>
+                                <td>${phone?.releaseDate}</td>
                             </tr>
 
                             <tr class="table-color2">
                                 <td>Brand</td>
-                                <td>${phone.brand}</td>
+                                <td>${phone?.brand}</td>
                             </tr>
                             <tr class="table-color3">
                                 <td class="fw-bold">Connective</td>
@@ -69,33 +91,33 @@ const displayDetailsPhone = (phone) => {
                             </tr>
                             <tr class="table-color1">
                                 <td>Bluetooth</td>
-                                <td>${phone.others.Bluetooth}</td>
+                                <td>${phone?.others?.Bluetooth}</td>
                             </tr>
 
                             <tr class="table-color2">
                                 <td>GPS</td>
-                                <td>${phone.others.GPS}</td>
+                                <td>${phone?.others?.GPS}</td>
                             </tr>
                             <tr class="table-color1">
                                 <td>NFC</td>
-                                <td>${phone.others.NFC}</td>
+                                <td>${phone?.others?.NFC}</td>
                             </tr>
                             <tr class="table-color2">
                                 <td>Radio</td>
-                                <td>${phone.others.Radio}</td>
+                                <td>${phone?.others?.Radio}</td>
                             </tr>
 
                             <tr class="table-color1">
                                 <td>USB</td>
-                                <td>${phone.others.USB}</td>
+                                <td>${phone?.others?.USB}</td>
                             </tr>
                             <tr class="table-color2">
                                 <td>WLAN</td>
-                                <td>${phone.others.WLAN}</td>
+                                <td>${phone?.others?.WLAN}</td>
                             </tr>
                             <tr class="table-color1">
                                 <td>Sensors</td>
-                                <td>${phone.mainFeatures.sensors[0]},${phone.mainFeatures.sensors[1]},${phone.mainFeatures.sensors[2]}, ${phone.mainFeatures.sensors[3]},${phone.mainFeatures.sensors[4]}, ${phone.mainFeatures.sensors[5]}}</td>
+                                <td>${phone?.mainFeatures?.sensors[0]},${phone?.mainFeatures?.sensors[1]},${phone?.mainFeatures?.sensors[2]}, ${phone?.mainFeatures?.sensors[3]},${phone?.mainFeatures?.sensors[4]}, ${phone?.mainFeatures?.sensors[5]}}</td>
                             </tr>
 
                             <tr class="table-color3">
@@ -104,16 +126,16 @@ const displayDetailsPhone = (phone) => {
                             </tr>
                             <tr class="table-color2">
                                 <td>Size</td>
-                                <td>${phone.mainFeatures.displaySize}</td>
+                                <td>${phone?.mainFeatures?.displaySize}</td>
                             </tr>
                             <tr class="table-color1">
                                 <td>Storage</td>
-                                <td>${phone.mainFeatures.storage}</td>
+                                <td>${phone?.mainFeatures?.storage}</td>
                             </tr>
 
                             <tr class="table-color2">
                                 <td>ChipSet</td>
-                                <td>${phone.mainFeatures.chipSet}</td>
+                                <td>${phone?.mainFeatures?.chipSet}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -123,7 +145,7 @@ const displayDetailsPhone = (phone) => {
     `
     detailsContainer.appendChild(div);
 
-    console.log(phone)
+    // console.log(phone)
     // console.log(phone.image)
     // console.log(phone.name)
     // console.log(phone.releaseDate)
@@ -132,8 +154,8 @@ const displayDetailsPhone = (phone) => {
     // console.log(phone.mainFeatures.displaySize)
     // console.log(phone.mainFeatures.storage)
     // sensor    
-    console.log(phone.mainFeatures.sensors[0])
-    console.log(phone.mainFeatures.sensors[1])
+    // console.log(phone.mainFeatures.sensors[0])
+    // console.log(phone.mainFeatures.sensors[1])
     // console.log(displaySensor(phone.mainFeatures.sensors))
     // others
     // console.log(phone.others.Bluetooth)
