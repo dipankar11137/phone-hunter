@@ -122,7 +122,7 @@ const displayDetailsPhone = (phone) => {
                         <tbody>
                             <tr class="table-color1">
                                 <td>Release</td>
-                                <td>${phone?.releaseDate}</td>
+                                <td>${displayRelease(phone?.releaseDate)}</td>
                             </tr>
 
                             <tr class="table-color2">
@@ -189,6 +189,16 @@ const displayDetailsPhone = (phone) => {
     `
 
     detailsContainer.appendChild(div);
+
+}
+
+const displayRelease = (release) => {
+
+    if (release == '') {
+        return 'Up comming';
+    } else {
+        return release;
+    }
 
 }
 
